@@ -232,7 +232,7 @@ export default {
 
 Create a `.env` file in your project root:
 
-```env
+```sh
 VITE_APP_TITLE=My App
 VITE_API_URL=https://api.example.com
 ```

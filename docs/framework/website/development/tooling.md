@@ -245,7 +245,7 @@ Pre-commit hooks are set up with Husky and lint-staged:
 
 Create a `.env` file:
 
-```env
+```sh
 VITE_API_URL=https://api.example.com
 VITE_APP_TITLE=My App
 ```

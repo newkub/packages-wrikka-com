@@ -18,7 +18,7 @@ Before deploying, ensure you have:
 
 Create a `.env` file in your project root:
 
-```env
+```sh
 NODE_ENV=production
 PORT=3000
 DATABASE_URL=your_database_connection_string

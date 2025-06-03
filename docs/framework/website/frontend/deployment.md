@@ -161,7 +161,7 @@ For environment variables in production:
    - Prefix with `VITE_` for Vite
    - Stored in `.env.production`
    
-   ```env
+   ```sh
    VITE_API_URL=https://api.example.com
    VITE_APP_TITLE=My App
    ```

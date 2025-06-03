@@ -116,7 +116,7 @@ export default defineAppConfig({
 
 Environment variables are exposed to your application via `import.meta.env`.
 
-```env
+```sh
 # Server port
 VITE_PORT=3000
 
