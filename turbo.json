@@ -1,27 +1,48 @@
 {
 	"$schema": "https://turbo.build/schema.json",
-	"globalDependencies": ["vitepress", "vue"],
+	"globalDependencies": ["**/.env.*local"],
 	"tasks": {
-		"build": {
-			"dependsOn": ["^build"],
-			"inputs": ["$TURBO_DEFAULT$", ".env*"],
-			"outputs": [".next/**", "!.next/cache/**", ".vitepress/dist"]
-		},
-		"prepare": {
-			"dependsOn": ["^prepare"]
-		},
-		"lint": {
-			"dependsOn": ["^lint"]
-		},
-		"format": {
-			"dependsOn": ["^format"]
-		},
-		"check-types": {
-			"dependsOn": ["^check-types"]
-		},
 		"dev": {
 			"cache": false,
-			"persistent": true
+			"persistent": true,
+			"dependsOn": ["^build"]
+		},
+		"build": {
+			"dependsOn": ["^build", "lint"],
+			"inputs": [
+				"src/**/*",
+				"public/**/*",
+				".env*",
+				"tsconfig.json",
+				"next.config.js",
+				"vite.config.ts"
+			],
+			"outputs": [
+				".next/**",
+				"!.next/cache/**",
+				".vitepress/dist/**",
+				"dist/**",
+				"build/**"
+			],
+			"cache": true
+		},
+		"test": {
+			"dependsOn": ["^build"],
+			"inputs": ["src/**/*", "test/**/*", "**/*.test.ts", "**/*.test.tsx"],
+			"outputs": ["coverage/**"],
+			"cache": true
+		},
+		"lint": {
+			"outputs": [],
+			"cache": true
+		},
+		"format": {
+			"outputs": [],
+			"cache": true
+		},
+		"clean": {
+			"cache": false,
+			"outputs": []
 		}
 	}
 }
