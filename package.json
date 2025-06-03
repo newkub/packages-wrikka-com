@@ -1,0 +1,25 @@
+{
+	"name": "docs-wrikka-com",
+	"type": "module",
+	"scripts": {
+		"dev": "vitepress dev",
+		"build": "vitepress build",
+		"preview": "vitepress preview",
+		"format": "biome format --write && bunx dprint fmt",
+		"lint": "biome lint --write && bunx vue-tsc --noEmit"
+	},
+	"dependencies": {
+		"vitepress-plugin-mermaid": "^2.0.17",
+		"vitepress-plugin-group-icons": "^1.5.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "latest",
+		"@iconify-json/mdi": "^1.2.3",
+		"unocss": "^66.1.2",
+		"vite": "^6.3.5",
+		"vitepress": "^1.6.3"
+	},
+	"overrides": {
+		"vite": "npm:rolldown-vite@latest"
+	}
+}
