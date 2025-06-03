@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - name: install
+      run: bun install
+    - name: format
+      run: bun biome format --write .
+
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: lint
+      run: bunx biome lint --write . && bun tsc --noEmit
