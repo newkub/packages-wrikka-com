@@ -161,74 +161,77 @@ console.log('Total:', total);</code></pre>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const views = [
-  { id: 'list', name: 'รายการงาน', icon: 'i-mdi-format-list-checkbox' },
-  { id: 'board', name: 'บอร์ด', icon: 'i-mdi-view-column-outline' },
-  { id: 'calendar', name: 'ปฏิทิน', icon: 'i-mdi-calendar-month' },
-  { id: 'timeline', name: 'ไทม์ไลน์', icon: 'i-mdi-timeline-outline' },
-  { id: 'dashboard', name: 'แดชบอร์ด', icon: 'i-mdi-view-dashboard-outline' },
+	{ id: "list", name: "รายการงาน", icon: "i-mdi-format-list-checkbox" },
+	{ id: "board", name: "บอร์ด", icon: "i-mdi-view-column-outline" },
+	{ id: "calendar", name: "ปฏิทิน", icon: "i-mdi-calendar-month" },
+	{ id: "timeline", name: "ไทม์ไลน์", icon: "i-mdi-timeline-outline" },
+	{ id: "dashboard", name: "แดชบอร์ด", icon: "i-mdi-view-dashboard-outline" },
 ];
 
 const projects = [
-  { id: 'project1', name: 'Project Alpha', color: 'bg-blue-500' },
-  { id: 'project2', name: 'Project Beta', color: 'bg-green-500' },
-  { id: 'project3', name: 'Project Gamma', color: 'bg-purple-500' },
+	{ id: "project1", name: "Project Alpha", color: "bg-blue-500" },
+	{ id: "project2", name: "Project Beta", color: "bg-green-500" },
+	{ id: "project3", name: "Project Gamma", color: "bg-purple-500" },
 ];
 
 const tasks = [
-  {
-    id: 'task1',
-    title: 'ออกแบบ UI หน้าหลัก',
-    description: 'ออกแบบ UI ตาม wireframe',
-    status: 'กำลังทำงาน',
-    dueDate: '15 พ.ค. 2566',
-    assignees: ['user1', 'user2'],
-    priority: 'high'
-  },
-  {
-    id: 'task2',
-    title: 'เขียน API สำหรับระบบล็อกอิน',
-    description: 'สร้าง endpoint สำหรับการล็อกอินและลงทะเบียน',
-    status: 'รอดำเนินการ',
-    dueDate: '20 พ.ค. 2566',
-    assignees: ['user3'],
-    priority: 'medium'
-  },
-  {
-    id: 'task3',
-    title: 'ทดสอบระบบหลังบ้าน',
-    description: 'ทดสอบฟังก์ชันการทำงานทั้งหมด',
-    status: 'เสร็จสิ้น',
-    dueDate: '10 พ.ค. 2566',
-    assignees: ['user4', 'user5'],
-    priority: 'low'
-  },
-  {
-    id: 'task4',
-    title: 'อัปเดตเอกสาร API',
-    description: 'อัปเดตเอกสารให้ครบถ้วน',
-    status: 'กำลังตรวจสอบ',
-    dueDate: '18 พ.ค. 2566',
-    assignees: ['user1'],
-    priority: 'medium'
-  },
+	{
+		id: "task1",
+		title: "ออกแบบ UI หน้าหลัก",
+		description: "ออกแบบ UI ตาม wireframe",
+		status: "กำลังทำงาน",
+		dueDate: "15 พ.ค. 2566",
+		assignees: ["user1", "user2"],
+		priority: "high",
+	},
+	{
+		id: "task2",
+		title: "เขียน API สำหรับระบบล็อกอิน",
+		description: "สร้าง endpoint สำหรับการล็อกอินและลงทะเบียน",
+		status: "รอดำเนินการ",
+		dueDate: "20 พ.ค. 2566",
+		assignees: ["user3"],
+		priority: "medium",
+	},
+	{
+		id: "task3",
+		title: "ทดสอบระบบหลังบ้าน",
+		description: "ทดสอบฟังก์ชันการทำงานทั้งหมด",
+		status: "เสร็จสิ้น",
+		dueDate: "10 พ.ค. 2566",
+		assignees: ["user4", "user5"],
+		priority: "low",
+	},
+	{
+		id: "task4",
+		title: "อัปเดตเอกสาร API",
+		description: "อัปเดตเอกสารให้ครบถ้วน",
+		status: "กำลังตรวจสอบ",
+		dueDate: "18 พ.ค. 2566",
+		assignees: ["user1"],
+		priority: "medium",
+	},
 ];
 
-const activeView = ref('list');
-const activeProject = ref('project1');
+const activeView = ref("list");
+const activeProject = ref("project1");
 const selectedTask = ref(tasks[0]);
-const selectedLanguage = ref('javascript');
+const selectedLanguage = ref("javascript");
 
 const getStatusClass = (status: string) => {
-  const classes = {
-    'กำลังทำงาน': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
-    'รอดำเนินการ': 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
-    'เสร็จสิ้น': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
-    'กำลังตรวจสอบ': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
-  };
-  return classes[status as keyof typeof classes] || 'bg-gray-100 text-gray-800';
+	const classes = {
+		กำลังทำงาน:
+			"bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
+		รอดำเนินการ: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300",
+		เสร็จสิ้น:
+			"bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+		กำลังตรวจสอบ:
+			"bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+	};
+	return classes[status as keyof typeof classes] || "bg-gray-100 text-gray-800";
 };
 </script>
 

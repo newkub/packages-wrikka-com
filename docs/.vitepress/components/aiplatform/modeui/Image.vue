@@ -19,51 +19,51 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const imageApps = [
-  {
-    name: 'DALL-E 3',
-    description: 'สร้างภาพจากข้อความด้วย AI',
-    icon: 'i-mdi-image-edit-outline',
-    prompt: 'สร้างภาพด้วย DALL-E 3: ',
-  },
-  {
-    name: 'Midjourney',
-    description: 'สร้างภาพศิลปะคุณภาพสูง',
-    icon: 'i-mdi-palette-outline',
-    prompt: 'สร้างภาพศิลปะด้วย Midjourney: ',
-  },
-  {
-    name: 'Stable Diffusion',
-    description: 'สร้างภาพแบบโอเพนซอร์ส',
-    icon: 'i-mdi-brush-variant',
-    prompt: 'สร้างภาพด้วย Stable Diffusion: ',
-  },
-  {
-    name: 'Photoshop AI',
-    description: 'แก้ไขภาพขั้นสูง',
-    icon: 'i-mdi-image-edit',
-    prompt: 'แก้ไขภาพด้วย Photoshop AI: ',
-  },
-  {
-    name: 'Canva',
-    description: 'ออกแบบกราฟิกง่ายๆ',
-    icon: 'i-mdi-format-paint',
-    prompt: 'ออกแบบกราฟิกด้วย Canva: ',
-  },
-  {
-    name: 'Remove BG',
-    description: 'ลบพื้นหลังอัตโนมัติ',
-    icon: 'i-mdi-image-remove-outline',
-    prompt: 'ลบพื้นหลังรูปภาพ: ',
-  },
+	{
+		name: "DALL-E 3",
+		description: "สร้างภาพจากข้อความด้วย AI",
+		icon: "i-mdi-image-edit-outline",
+		prompt: "สร้างภาพด้วย DALL-E 3: ",
+	},
+	{
+		name: "Midjourney",
+		description: "สร้างภาพศิลปะคุณภาพสูง",
+		icon: "i-mdi-palette-outline",
+		prompt: "สร้างภาพศิลปะด้วย Midjourney: ",
+	},
+	{
+		name: "Stable Diffusion",
+		description: "สร้างภาพแบบโอเพนซอร์ส",
+		icon: "i-mdi-brush-variant",
+		prompt: "สร้างภาพด้วย Stable Diffusion: ",
+	},
+	{
+		name: "Photoshop AI",
+		description: "แก้ไขภาพขั้นสูง",
+		icon: "i-mdi-image-edit",
+		prompt: "แก้ไขภาพด้วย Photoshop AI: ",
+	},
+	{
+		name: "Canva",
+		description: "ออกแบบกราฟิกง่ายๆ",
+		icon: "i-mdi-format-paint",
+		prompt: "ออกแบบกราฟิกด้วย Canva: ",
+	},
+	{
+		name: "Remove BG",
+		description: "ลบพื้นหลังอัตโนมัติ",
+		icon: "i-mdi-image-remove-outline",
+		prompt: "ลบพื้นหลังรูปภาพ: ",
+	},
 ];
 
-const emit = defineEmits(['select-app']);
+const emit = defineEmits(["select-app"]);
 
-const selectApp = (app: typeof imageApps[number]) => {
-  emit('select-app', app.prompt);
+const selectApp = (app: (typeof imageApps)[number]) => {
+	emit("select-app", app.prompt);
 };
 </script>
 

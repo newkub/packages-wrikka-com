@@ -2,21 +2,20 @@ import type { ShikiTransformer } from "@shikijs/types";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import { type DefaultTheme, defineConfig } from "vitepress";
 import { groupIconMdPlugin } from "vitepress-plugin-group-icons";
-import { withMermaid } from "vitepress-plugin-mermaid";
-import { sidebar } from "./sidebar";
-
 import viteConfig from "./vite.config";
+import { sidebar } from "./sidebar";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
 	vite: viteConfig,
 	title: "My Awesome Project",
 	description: "A VitePress Site",
+	sidebar: sidebar,
 	cleanUrls: true,
 	sitemap: {
 		hostname: "https://docs.kowork.io",
 	},
-	ignoreDeadLinks: false,
+	ignoreDeadLinks: true,
 	head: [
 		["link", { rel: "icon", href: "/favicon.svg" }],
 		["meta", { property: "og:image", content: "/favicon.svg" }],

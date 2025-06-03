@@ -95,145 +95,156 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed } from "vue";
 
-const searchQuery = ref('');
-const selectedCategory = ref('ทั้งหมด');
+const searchQuery = ref("");
+const selectedCategory = ref("ทั้งหมด");
 
 const categories = [
-  'ทั้งหมด',
-  'แฟชั่น',
-  'อิเล็กทรอนิกส์',
-  'ของใช้ในบ้าน',
-  'ความงาม',
-  'ของเล่น',
-  'กีฬา',
-  'หนังสือ',
-  'อื่นๆ'
+	"ทั้งหมด",
+	"แฟชั่น",
+	"อิเล็กทรอนิกส์",
+	"ของใช้ในบ้าน",
+	"ความงาม",
+	"ของเล่น",
+	"กีฬา",
+	"หนังสือ",
+	"อื่นๆ",
 ];
 
 const platforms = [
-  { name: 'Lazada', icon: 'i-mdi-shopping text-red-500' },
-  { name: 'Shopee', icon: 'i-mdi-shopping-search text-orange-400' },
-  { name: 'JD Central', icon: 'i-mdi-store text-red-600' },
-  { name: 'Shopify', icon: 'i-mdi-cart text-green-600' },
-  { name: 'Amazon', icon: 'i-mdi-amazon text-yellow-500' },
-  { name: 'eBay', icon: 'i-mdi-ebay text-blue-500' },
+	{ name: "Lazada", icon: "i-mdi-shopping text-red-500" },
+	{ name: "Shopee", icon: "i-mdi-shopping-search text-orange-400" },
+	{ name: "JD Central", icon: "i-mdi-store text-red-600" },
+	{ name: "Shopify", icon: "i-mdi-cart text-green-600" },
+	{ name: "Amazon", icon: "i-mdi-amazon text-yellow-500" },
+	{ name: "eBay", icon: "i-mdi-ebay text-blue-500" },
 ];
 
 const products = [
-  {
-    name: 'หูฟังไร้สาย Sony WH-1000XM4',
-    price: 9990,
-    rating: 4.8,
-    reviews: 1245,
-    category: 'อิเล็กทรอนิกส์',
-    platform: 'Lazada',
-    platformIcon: 'i-mdi-shopping text-red-500',
-    image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'รองเท้าวิ่ง Nike Air Zoom Pegasus 39',
-    price: 4290,
-    rating: 4.6,
-    reviews: 876,
-    category: 'กีฬา',
-    platform: 'Shopee',
-    platformIcon: 'i-mdi-shopping-search text-orange-400',
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'สมาร์ทโฟน Samsung Galaxy S23 Ultra',
-    price: 42900,
-    rating: 4.9,
-    reviews: 2345,
-    category: 'อิเล็กทรอนิกส์',
-    platform: 'JD Central',
-    platformIcon: 'i-mdi-store text-red-600',
-    image: 'https://images.unsplash.com/photo-1676314925821-5fd089406f52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'นาฬิกาข้อมืออัจฉริยะ Apple Watch Series 8',
-    price: 15900,
-    rating: 4.7,
-    reviews: 1890,
-    category: 'อิเล็กทรอนิกส์',
-    platform: 'Lazada',
-    platformIcon: 'i-mdi-shopping text-red-500',
-    image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'กระเป๋าแบรนด์เนม Louis Vuitton',
-    price: 85000,
-    rating: 4.9,
-    reviews: 342,
-    category: 'แฟชั่น',
-    platform: 'Shopee',
-    platformIcon: 'i-mdi-shopping-search text-orange-400',
-    image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'หุ่นยนต์ดูดฝุ่น Xiaomi Robot Vacuum Mop 2 Pro',
-    price: 12990,
-    rating: 4.5,
-    reviews: 765,
-    category: 'ของใช้ในบ้าน',
-    platform: 'Lazada',
-    platformIcon: 'i-mdi-shopping text-red-500',
-    image: 'https://images.unsplash.com/photo-1583845112203-4543754ea545?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'เครื่องทำกาแฟ Nespresso Vertuo Next',
-    price: 8990,
-    rating: 4.7,
-    reviews: 432,
-    category: 'ของใช้ในบ้าน',
-    platform: 'JD Central',
-    platformIcon: 'i-mdi-store text-red-600',
-    image: 'https://images.unsplash.com/photo-1608350308993-110b8bcb0933?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  },
-  {
-    name: 'หูฟัง AirPods Pro 2',
-    price: 10900,
-    rating: 4.8,
-    reviews: 3210,
-    category: 'อิเล็กทรอนิกส์',
-    platform: 'Shopee',
-    platformIcon: 'i-mdi-shopping-search text-orange-400',
-    image: 'https://images.unsplash.com/photo-1633894583724-7a3b2a9db8a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
-  }
+	{
+		name: "หูฟังไร้สาย Sony WH-1000XM4",
+		price: 9990,
+		rating: 4.8,
+		reviews: 1245,
+		category: "อิเล็กทรอนิกส์",
+		platform: "Lazada",
+		platformIcon: "i-mdi-shopping text-red-500",
+		image:
+			"https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "รองเท้าวิ่ง Nike Air Zoom Pegasus 39",
+		price: 4290,
+		rating: 4.6,
+		reviews: 876,
+		category: "กีฬา",
+		platform: "Shopee",
+		platformIcon: "i-mdi-shopping-search text-orange-400",
+		image:
+			"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "สมาร์ทโฟน Samsung Galaxy S23 Ultra",
+		price: 42900,
+		rating: 4.9,
+		reviews: 2345,
+		category: "อิเล็กทรอนิกส์",
+		platform: "JD Central",
+		platformIcon: "i-mdi-store text-red-600",
+		image:
+			"https://images.unsplash.com/photo-1676314925821-5fd089406f52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "นาฬิกาข้อมืออัจฉริยะ Apple Watch Series 8",
+		price: 15900,
+		rating: 4.7,
+		reviews: 1890,
+		category: "อิเล็กทรอนิกส์",
+		platform: "Lazada",
+		platformIcon: "i-mdi-shopping text-red-500",
+		image:
+			"https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "กระเป๋าแบรนด์เนม Louis Vuitton",
+		price: 85000,
+		rating: 4.9,
+		reviews: 342,
+		category: "แฟชั่น",
+		platform: "Shopee",
+		platformIcon: "i-mdi-shopping-search text-orange-400",
+		image:
+			"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "หุ่นยนต์ดูดฝุ่น Xiaomi Robot Vacuum Mop 2 Pro",
+		price: 12990,
+		rating: 4.5,
+		reviews: 765,
+		category: "ของใช้ในบ้าน",
+		platform: "Lazada",
+		platformIcon: "i-mdi-shopping text-red-500",
+		image:
+			"https://images.unsplash.com/photo-1583845112203-4543754ea545?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "เครื่องทำกาแฟ Nespresso Vertuo Next",
+		price: 8990,
+		rating: 4.7,
+		reviews: 432,
+		category: "ของใช้ในบ้าน",
+		platform: "JD Central",
+		platformIcon: "i-mdi-store text-red-600",
+		image:
+			"https://images.unsplash.com/photo-1608350308993-110b8bcb0933?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
+	{
+		name: "หูฟัง AirPods Pro 2",
+		price: 10900,
+		rating: 4.8,
+		reviews: 3210,
+		category: "อิเล็กทรอนิกส์",
+		platform: "Shopee",
+		platformIcon: "i-mdi-shopping-search text-orange-400",
+		image:
+			"https://images.unsplash.com/photo-1633894583724-7a3b2a9db8a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+	},
 ];
 
 const filteredProducts = computed(() => {
-  let result = [...products];
-  
-  // Filter by category
-  if (selectedCategory.value !== 'ทั้งหมด') {
-    result = result.filter(product => product.category === selectedCategory.value);
-  }
-  
-  // Filter by search query
-  if (searchQuery.value) {
-    const query = searchQuery.value.toLowerCase();
-    result = result.filter(product => 
-      product.name.toLowerCase().includes(query) || 
-      product.category.toLowerCase().includes(query) ||
-      product.platform.toLowerCase().includes(query)
-    );
-  }
-  
-  return result;
+	let result = [...products];
+
+	// Filter by category
+	if (selectedCategory.value !== "ทั้งหมด") {
+		result = result.filter(
+			(product) => product.category === selectedCategory.value,
+		);
+	}
+
+	// Filter by search query
+	if (searchQuery.value) {
+		const query = searchQuery.value.toLowerCase();
+		result = result.filter(
+			(product) =>
+				product.name.toLowerCase().includes(query) ||
+				product.category.toLowerCase().includes(query) ||
+				product.platform.toLowerCase().includes(query),
+		);
+	}
+
+	return result;
 });
 
 const selectCategory = (category: string) => {
-  selectedCategory.value = category;
+	selectedCategory.value = category;
 };
 
-const selectPlatform = (platform: {name: string, icon: string}) => {
-  searchQuery.value = platform.name;
+const selectPlatform = (platform: { name: string; icon: string }) => {
+	searchQuery.value = platform.name;
 };
 
-const emit = defineEmits(['select-app']);
+const emit = defineEmits(["select-app"]);
 </script>
 
 <style scoped>

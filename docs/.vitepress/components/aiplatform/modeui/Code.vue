@@ -241,172 +241,178 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
+import { ref, computed, onMounted } from "vue";
+import { v4 as uuidv4 } from "uuid";
 
 interface CodeTask {
-  id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-  archived: boolean;
-  createdAt: number;
-  updatedAt: number;
-  // For editing
-  editing?: boolean;
-  editedTitle?: string;
-  editedDescription?: string;
+	id: string;
+	title: string;
+	description: string;
+	completed: boolean;
+	archived: boolean;
+	createdAt: number;
+	updatedAt: number;
+	// For editing
+	editing?: boolean;
+	editedTitle?: string;
+	editedDescription?: string;
 }
 
 // Tabs
 const tabs = [
-  { id: 'task', label: 'Task' },
-  { id: 'archive', label: 'Archive' },
+	{ id: "task", label: "Task" },
+	{ id: "archive", label: "Archive" },
 ];
 
-const activeTab = ref('task');
+const activeTab = ref("task");
 const showNewTaskForm = ref(false);
 const showArchiveActions = ref(false);
 
 // Task management
 const tasks = ref<CodeTask[]>([]);
 const newTask = ref({
-  title: '',
-  description: '',
-  completed: false,
+	title: "",
+	description: "",
+	completed: false,
 });
 
 // Computed properties
-const activeTasks = computed(() => 
-  tasks.value.filter(task => !task.archived)
-    .sort((a, b) => b.updatedAt - a.updatedAt)
+const activeTasks = computed(() =>
+	tasks.value
+		.filter((task) => !task.archived)
+		.sort((a, b) => b.updatedAt - a.updatedAt),
 );
 
-const archivedTasks = computed(() => 
-  tasks.value.filter(task => task.archived)
-    .sort((a, b) => b.updatedAt - a.updatedAt)
+const archivedTasks = computed(() =>
+	tasks.value
+		.filter((task) => task.archived)
+		.sort((a, b) => b.updatedAt - a.updatedAt),
 );
 
 // Load tasks from localStorage
 const loadTasks = () => {
-  const savedTasks = localStorage.getItem('codeTasks');
-  if (savedTasks) {
-    tasks.value = JSON.parse(savedTasks);
-  }
+	const savedTasks = localStorage.getItem("codeTasks");
+	if (savedTasks) {
+		tasks.value = JSON.parse(savedTasks);
+	}
 };
 
 // Save tasks to localStorage
 const saveTasks = () => {
-  localStorage.setItem('codeTasks', JSON.stringify(tasks.value));
+	localStorage.setItem("codeTasks", JSON.stringify(tasks.value));
 };
 
 // Add a new task
 const addTask = () => {
-  if (!newTask.value.title.trim()) return;
-  
-  const task: CodeTask = {
-    id: uuidv4(),
-    title: newTask.value.title.trim(),
-    description: newTask.value.description.trim(),
-    completed: false,
-    archived: false,
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-  };
-  
-  tasks.value.unshift(task);
-  saveTasks();
-  
-  // Reset form
-  newTask.value = {
-    title: '',
-    description: '',
-    completed: false,
-  };
-  
-  showNewTaskForm.value = false;
+	if (!newTask.value.title.trim()) return;
+
+	const task: CodeTask = {
+		id: uuidv4(),
+		title: newTask.value.title.trim(),
+		description: newTask.value.description.trim(),
+		completed: false,
+		archived: false,
+		createdAt: Date.now(),
+		updatedAt: Date.now(),
+	};
+
+	tasks.value.unshift(task);
+	saveTasks();
+
+	// Reset form
+	newTask.value = {
+		title: "",
+		description: "",
+		completed: false,
+	};
+
+	showNewTaskForm.value = false;
 };
 
 // Toggle task completion
 const updateTaskStatus = (task: CodeTask) => {
-  task.updatedAt = Date.now();
-  saveTasks();
+	task.updatedAt = Date.now();
+	saveTasks();
 };
 
 // Archive a task
 const archiveTask = (taskId: string) => {
-  const task = tasks.value.find(t => t.id === taskId);
-  if (task) {
-    task.archived = true;
-    task.updatedAt = Date.now();
-    saveTasks();
-  }
+	const task = tasks.value.find((t) => t.id === taskId);
+	if (task) {
+		task.archived = true;
+		task.updatedAt = Date.now();
+		saveTasks();
+	}
 };
 
 // Restore a task from archive
 const restoreTask = (taskId: string) => {
-  const task = tasks.value.find(t => t.id === taskId);
-  if (task) {
-    task.archived = false;
-    task.updatedAt = Date.now();
-    saveTasks();
-  }
+	const task = tasks.value.find((t) => t.id === taskId);
+	if (task) {
+		task.archived = false;
+		task.updatedAt = Date.now();
+		saveTasks();
+	}
 };
 
 // Delete a task
 const deleteTask = (taskId: string, force = false) => {
-  if (force || confirm('Are you sure you want to delete this task?')) {
-    tasks.value = tasks.value.filter(t => t.id !== taskId);
-    saveTasks();
-  }
+	if (force || confirm("Are you sure you want to delete this task?")) {
+		tasks.value = tasks.value.filter((t) => t.id !== taskId);
+		saveTasks();
+	}
 };
 
 // Clear all archived tasks
 const clearAllArchived = () => {
-  if (confirm('Are you sure you want to clear all archived tasks? This cannot be undone.')) {
-    tasks.value = tasks.value.filter(t => !t.archived);
-    saveTasks();
-    showArchiveActions.value = false;
-  }
+	if (
+		confirm(
+			"Are you sure you want to clear all archived tasks? This cannot be undone.",
+		)
+	) {
+		tasks.value = tasks.value.filter((t) => !t.archived);
+		saveTasks();
+		showArchiveActions.value = false;
+	}
 };
 
 // Edit task
 const editTask = (task: CodeTask) => {
-  // Store original values in case of cancel
-  task.editedTitle = task.title;
-  task.editedDescription = task.description;
-  task.editing = true;
+	// Store original values in case of cancel
+	task.editedTitle = task.title;
+	task.editedDescription = task.description;
+	task.editing = true;
 };
 
 // Save task edit
 const saveTaskEdit = (task: CodeTask) => {
-  if (task.editedTitle?.trim()) {
-    task.title = task.editedTitle.trim();
-    task.description = task.editedDescription?.trim() || '';
-    task.updatedAt = Date.now();
-    task.editing = false;
-    saveTasks();
-  }
+	if (task.editedTitle?.trim()) {
+		task.title = task.editedTitle.trim();
+		task.description = task.editedDescription?.trim() || "";
+		task.updatedAt = Date.now();
+		task.editing = false;
+		saveTasks();
+	}
 };
 
 // Cancel edit
 const cancelEdit = (task: CodeTask) => {
-  task.editing = false;
+	task.editing = false;
 };
 
 // Cancel new task form
 const cancelNewTask = () => {
-  newTask.value = {
-    title: '',
-    description: '',
-    completed: false,
-  };
-  showNewTaskForm.value = false;
+	newTask.value = {
+		title: "",
+		description: "",
+		completed: false,
+	};
+	showNewTaskForm.value = false;
 };
 
 // Initialize component
 onMounted(() => {
-  loadTasks();
+	loadTasks();
 });
 </script>
 

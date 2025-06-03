@@ -16,17 +16,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 defineProps<{
-  suggestions: Array<{
-    title: string;
-    description: string;
-    prompt: string;
-  }>;
+	suggestions: Array<{
+		title: string;
+		description: string;
+		prompt: string;
+	}>;
 }>();
 
-defineEmits<(e: 'select-suggestion', prompt: string) => void>();
+defineEmits<(e: "select-suggestion", prompt: string) => void>();
 </script>
 
 <style scoped>

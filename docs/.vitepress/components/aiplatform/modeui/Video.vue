@@ -19,51 +19,51 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const videoApps = [
-  {
-    name: 'Runway ML',
-    description: 'สร้างวิดีโอจากข้อความด้วย AI',
-    icon: 'i-mdi-video-3d',
-    prompt: 'สร้างวิดีโอด้วย Runway ML: ',
-  },
-  {
-    name: 'Pika Labs',
-    description: 'สร้างอนิเมชั่นและเอฟเฟค',
-    icon: 'i-mdi-movie-open-play',
-    prompt: 'สร้างอนิเมชั่นด้วย Pika Labs: ',
-  },
-  {
-    name: 'Adobe Premiere',
-    description: 'ตัดต่อวิดีโอระดับมืออาชีพ',
-    icon: 'i-mdi-video-box',
-    prompt: 'ตัดต่อวิดีโอด้วย Adobe Premiere: ',
-  },
-  {
-    name: 'CapCut',
-    description: 'ตัดต่อวิดีโอแบบง่ายๆ',
-    icon: 'i-mdi-scissors-cutting',
-    prompt: 'ตัดต่อวิดีโอด้วย CapCut: ',
-  },
-  {
-    name: 'Synthesia',
-    description: 'สร้างวิดีโอพรีเซนเทชั่น AI',
-    icon: 'i-mdi-account-tie-voice',
-    prompt: 'สร้างวิดีโอพรีเซนเทชั่นด้วย Synthesia: ',
-  },
-  {
-    name: 'HeyGen',
-    description: 'สร้างวิดีโอ AI พรีเซนเตอร์',
-    icon: 'i-mdi-robot-happy-outline',
-    prompt: 'สร้างวิดีโอพรีเซนเตอร์ด้วย HeyGen: ',
-  },
+	{
+		name: "Runway ML",
+		description: "สร้างวิดีโอจากข้อความด้วย AI",
+		icon: "i-mdi-video-3d",
+		prompt: "สร้างวิดีโอด้วย Runway ML: ",
+	},
+	{
+		name: "Pika Labs",
+		description: "สร้างอนิเมชั่นและเอฟเฟค",
+		icon: "i-mdi-movie-open-play",
+		prompt: "สร้างอนิเมชั่นด้วย Pika Labs: ",
+	},
+	{
+		name: "Adobe Premiere",
+		description: "ตัดต่อวิดีโอระดับมืออาชีพ",
+		icon: "i-mdi-video-box",
+		prompt: "ตัดต่อวิดีโอด้วย Adobe Premiere: ",
+	},
+	{
+		name: "CapCut",
+		description: "ตัดต่อวิดีโอแบบง่ายๆ",
+		icon: "i-mdi-scissors-cutting",
+		prompt: "ตัดต่อวิดีโอด้วย CapCut: ",
+	},
+	{
+		name: "Synthesia",
+		description: "สร้างวิดีโอพรีเซนเทชั่น AI",
+		icon: "i-mdi-account-tie-voice",
+		prompt: "สร้างวิดีโอพรีเซนเทชั่นด้วย Synthesia: ",
+	},
+	{
+		name: "HeyGen",
+		description: "สร้างวิดีโอ AI พรีเซนเตอร์",
+		icon: "i-mdi-robot-happy-outline",
+		prompt: "สร้างวิดีโอพรีเซนเตอร์ด้วย HeyGen: ",
+	},
 ];
 
-const emit = defineEmits(['select-app']);
+const emit = defineEmits(["select-app"]);
 
-const selectApp = (app: typeof videoApps[number]) => {
-  emit('select-app', app.prompt);
+const selectApp = (app: (typeof videoApps)[number]) => {
+	emit("select-app", app.prompt);
 };
 </script>
 

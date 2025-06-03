@@ -8,7 +8,6 @@ import sidebarKoAI from "./sidebar/sidebarKoAI";
 import sidebarKogit from "./sidebar/sidebarKogit";
 import sidebarOpenAPI from "./sidebar/sidebarOpenAPI";
 import sidebarPackages from "./sidebar/sidebarPackages";
-import sidebarProducts from "./sidebar/sidebarProducts";
 import sidebarWebsite from "./sidebar/sidebarWebsite";
 import sidebarCommandPalette from "./sidebar/sidebarCommandPalette";
 
@@ -21,7 +20,7 @@ interface SidebarConfig {
 	};
 }
 
-export const sidebar: SidebarConfig = {
+const sidebar: SidebarConfig = {
 	"/apis/components": {
 		logo: "",
 		items: sidebarComponents(),
@@ -68,3 +67,5 @@ export const sidebar: SidebarConfig = {
 		items: sidebarCommandPalette(),
 	},
 };
+
+export { sidebar };
