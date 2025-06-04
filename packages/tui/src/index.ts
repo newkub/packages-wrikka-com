@@ -1,3 +1,3 @@
 
 export { useFzf } from './core/useFzf';
-export { useTerminalColor } from './core/useColor';
+export { useColor } from './core/useColor';
