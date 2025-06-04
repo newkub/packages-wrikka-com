@@ -1,0 +1,36 @@
+{
+  "name": "@wrikka/vite-image",
+  "version": "1.0.0",
+  "description": "A Vite plugin for optimizing images",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "lint": "biome lint src",
+    "format": "biome format --write src",
+    "release": "bunx release-it"
+  },
+  "keywords": [
+    "vite",
+    "plugin",
+    "image",
+    "optimization"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "tsdown": "^0.12.6",
+    "typescript": "^5.8.3",
+    "vite": "6.3.5"
+  },
+  "module": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  }
+}
