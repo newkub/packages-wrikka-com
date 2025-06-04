@@ -61,7 +61,7 @@ export function renderTasksTable(props: TableProps) {
   const headers = ['ID', 'Title', 'Status', 'Priority'];
   
   // Header
-  let headerLine = headers
+  const headerLine = headers
     .map((header, i) => header.padEnd(colWidths[i]))
     .join(' | ');
   
