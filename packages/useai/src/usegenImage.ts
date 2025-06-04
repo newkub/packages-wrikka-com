@@ -1,5 +1,5 @@
 import { OpenAI } from 'openai';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 // Type definitions
 interface BaseImageOptions {
@@ -21,7 +21,7 @@ type GenImageOptions = OpenAIImageOptions | GeminiImageOptions;
 
 // Helper functions
 const createOpenAIClient = () => new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const createGeminiClient = () => new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const createGeminiClient = () => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
 // Generator functions
 const generateWithOpenAI = async (options: OpenAIImageOptions): Promise<string[]> => {
@@ -39,11 +39,17 @@ const generateWithOpenAI = async (options: OpenAIImageOptions): Promise<string[]
 
 const generateWithGemini = async (options: GeminiImageOptions): Promise<string[]> => {
   const client = createGeminiClient();
-  const model = client.getGenerativeModel({ model: options.model || 'gemini-pro-vision' });
-  const result = await model.generateContent({
-    contents: [{ role: 'user', parts: [{ text: options.prompt }] }]
+  const response = await client.models.generateContent({
+    model: options.model || 'gemini-2.0-flash-001',
+    contents: [{
+      role: 'user',
+      parts: [{
+        text: options.prompt
+      }]
+    }],
+    temperature: 0.4
   });
-  return [result.response.text()];
+  return [response.text || ''];
 };
 
 // Main function

@@ -1,5 +1,5 @@
 import { OpenAI } from 'openai';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 import Anthropic from '@anthropic-ai/sdk';
 
 // Type definitions
@@ -20,7 +20,7 @@ type GenTextOptions = TextGenerationParams & ProviderConfig;
 // Client factories
 const createOpenAIClient = () => new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const createAnthropicClient = () => new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-const createGeminiClient = () => new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const createGeminiClient = () => new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
 // Generator functions
 const openAIGenerator = async (params: TextGenerationParams) => {
@@ -50,14 +50,14 @@ const anthropicGenerator = async (params: TextGenerationParams) => {
 
 const geminiGenerator = async (params: TextGenerationParams) => {
   const client = createGeminiClient();
-  const model = client.getGenerativeModel({ model: params.model || 'gemini-pro' });
-  const result = await model.generateContent({
-    contents: [{ role: 'user', parts: [{ text: params.prompt }] }],
+  const model = client.getGenerativeModel({ 
+    model: params.model || 'gemini-2.0-flash-001',
     generationConfig: {
       ...(params.maxTokens !== undefined && { maxOutputTokens: params.maxTokens }),
       ...(params.temperature !== undefined && { temperature: params.temperature }),
     }
   });
+  const result = await model.generateContent(params.prompt);
   return result.response.text();
 };
 
