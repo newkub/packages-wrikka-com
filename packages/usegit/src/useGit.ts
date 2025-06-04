@@ -1,5 +1,6 @@
 import { execa } from 'execa';
 
+// Export interfaces directly
 export interface GitCommandResult {
   stdout: string
   stderr: string
@@ -11,7 +12,8 @@ export interface UseGitReturn {
   isGitRepo: () => Promise<boolean>
 }
 
-export default function useGit(cwd: string): UseGitReturn {
+// Export the hook function
+export function useGit(cwd: string): UseGitReturn {
   const execute = async (args: string[]): Promise<GitCommandResult> => {
     const result = await execa('git', args, { 
       stdio: 'pipe', 
@@ -40,6 +42,8 @@ export default function useGit(cwd: string): UseGitReturn {
   return {
     execute,
     isGitRepo
-  }
+  };
 }
 
+// Export default
+export default useGit;

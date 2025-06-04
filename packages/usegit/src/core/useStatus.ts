@@ -1,15 +1,17 @@
-import { ref, readonly } from 'vue';
+import { ref, type Ref } from 'vue';
 import { execa } from 'execa';
 
+// Export the interface directly
 export interface GitStatusEntry {
   status: string;
   file: string;
 }
 
+// Export the hook function
 export function useGitStatus() {
-  const statusEntries = ref<GitStatusEntry[]>([]);
-  const loading = ref(false);
-  const error = ref<Error | null>(null);
+  const statusEntries: Ref<GitStatusEntry[]> = ref([]);
+  const loading: Ref<boolean> = ref(false);
+  const error: Ref<Error | null> = ref(null);
 
   async function getStatus(cwd: string): Promise<GitStatusEntry[]> {
     loading.value = true;
@@ -46,10 +48,13 @@ export function useGitStatus() {
   }
 
   return {
-    statusEntries: readonly(statusEntries),
-    loading: readonly(loading),
-    error: readonly(error),
+    status: statusEntries,
+    loading,
+    error,
     getStatus,
     isClean
   };
 }
+
+// Export default for backward compatibility
+export default useGitStatus;

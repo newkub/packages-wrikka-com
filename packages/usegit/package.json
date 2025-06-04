@@ -1,9 +1,10 @@
 {
-  "name": "@cli/git",
+  "name": "@wrikka/git",
   "version": "1.0.0",
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsdown",
     "dev": "bun --watch src/index.ts",
@@ -19,7 +20,7 @@
     "execa": "^9.6.0"
   },
   "exports": {
-    ".": "./dist/index.mjs",
+    ".": "./dist/index.js",
     "./package.json": "./package.json"
   }
 }
