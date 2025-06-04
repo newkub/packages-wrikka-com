@@ -4,7 +4,8 @@
   "type": "module",
   "packageManager": "bun@1.2.15",
   "workspaces": [
-    "docs"
+    "docs",
+    "packages/*"
   ],
   "scripts": {
     "dev": "turbo dev",
@@ -14,12 +15,7 @@
     "lint": "turbo lint",
     "update:deps": "bunx taze -r -w"
   },
-  "dependencies": {
-    "vitepress-plugin-group-icons": "^1.5.5",
-    "vitepress-plugin-mermaid": "^2.0.17"
-  },
   "devDependencies": {
-    "@biomejs/biome": "latest",
     "turbo": "^2.5.4"
   }
 }
